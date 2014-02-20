@@ -8,7 +8,7 @@ I made this template to scratch my own itch. I wanted to be able to do the follo
 
 3. Create a basic structure and automate a build process, so that I can automatically generate vendor prefixes for CSS and produce a development version of my code and a production version that is minified and uglified.
 
-4. Not have to learn another templating language or be reliant on a commercial tool such as CodeKit or Hammer.
+4. Not have to learn another templating language or be reliant on a commercial tool such as CodeKit or Hammer. (Also, neither of those products currently allows you to write in Stylus and apply [Autoprefixer](https://github.com/ai/autoprefixer) to the CSS.)
 
 ## How do I use this?
 
