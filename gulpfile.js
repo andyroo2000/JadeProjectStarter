@@ -6,8 +6,9 @@ var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var stylus = require('gulp-stylus');
 var jade = require('gulp-jade');
+var autoprefixer = require('gulp-autoprefixer');
 
-// Lint Task
+// Run jsHint
 gulp.task('hint', function() {
   return gulp.src('source-files/scripts/*.js')
     .pipe(jshint())
@@ -21,10 +22,11 @@ gulp.task('jade', function() {
     .pipe(gulp.dest('compiled-site/pretty'));
 });
 
-// Compile Stylus to plain CSS
+// Compile Stylus to prefixed CSS
 gulp.task('stylus', function() {
   return gulp.src('source-files/styles/*.styl')
     .pipe(stylus())
+    .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
     .pipe(gulp.dest('compiled-site/pretty/styles'));
 });
 
@@ -32,8 +34,12 @@ gulp.task('stylus', function() {
 gulp.task('watch', function() {
   gulp.watch('source-files/scripts/*.js', ['hint']);
   gulp.watch('source-files/*.jade', ['jade']);
+  gulp.watch('source-files/styles/*.styl', ['stylus']);
 });
 
+
+
+// The mega-task that runs when you type 'gulp' at the command line
 gulp.task('default', function(){
-  gulp.start('hint', 'jade', 'stylus', 'watch');
+  gulp.start('jade', 'stylus', 'watch');
 });
