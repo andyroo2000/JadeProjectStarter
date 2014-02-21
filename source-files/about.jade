@@ -3,3 +3,12 @@ html
   include partials/_header.jade
 body
   include partials/_nav.jade
+
+- var pageName = 'About'
+
+  h1.
+    #{pageName} Page
+  p.
+    This is a paragraph on the #{pageName} Page
+
+include partials/_footer.jade
