@@ -7,6 +7,7 @@ var jshint = require('gulp-jshint');
 var stylus = require('gulp-stylus');
 var jade = require('gulp-jade');
 var autoprefixer = require('gulp-autoprefixer');
+var notify = require("gulp-notify");
 
 // Run jsHint
 gulp.task('hint', function() {
@@ -15,10 +16,10 @@ gulp.task('hint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-// Compile Jade templates
 gulp.task('jade', function() {
   return gulp.src('source-files/*.jade')
-    .pipe(jade())
+    .pipe(jade({pretty: true}))
+    .on('error', notify.onError())
     .pipe(gulp.dest('compiled-site/pretty'));
 });
 
@@ -27,6 +28,7 @@ gulp.task('stylus', function() {
   return gulp.src('source-files/styles/*.styl')
     .pipe(stylus())
     .pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .on('error', notify.onError())
     .pipe(gulp.dest('compiled-site/pretty/styles'));
 });
 
