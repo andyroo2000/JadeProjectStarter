@@ -16,11 +16,19 @@ gulp.task('hint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('jade', function() {
+// Compile Jade to pretty HTML
+gulp.task('jade-pretty', function() {
   return gulp.src('source-files/*.jade')
     .pipe(jade({pretty: true}))
     .on('error', notify.onError())
     .pipe(gulp.dest('compiled-site/pretty'));
+});
+
+// Compile Jade to ugly HTML
+gulp.task('jade-ugly', function() {
+  return gulp.src('source-files/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('compiled-site/ugly'));
 });
 
 // Compile Stylus to prefixed CSS
@@ -43,5 +51,5 @@ gulp.task('watch', function() {
 
 // The mega-task that runs when you type 'gulp' at the command line
 gulp.task('default', function(){
-  gulp.start('jade', 'stylus', 'watch');
+  gulp.start('jade-pretty', 'jade-ugly', 'stylus', 'watch');
 });
