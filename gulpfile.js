@@ -13,7 +13,15 @@ var notify = require("gulp-notify");
 gulp.task('hint', function() {
   return gulp.src('source-files/scripts/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('default'))
+    .pipe(gulp.dest('compiled-site/pretty/scripts'));
+});
+
+// Minify JavaScript
+gulp.task('uglify', function() {
+  return gulp.src('source-files/scripts/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('compiled-site/ugly/scripts'));
 });
 
 
@@ -62,5 +70,5 @@ gulp.task('watch', function() {
 
 // The mega-task that runs when you type 'gulp' at the command line
 gulp.task('default', function(){
-  gulp.start('jade-pretty', 'jade-ugly', 'stylus', 'watch');
+  gulp.start('hint', 'uglify', 'jade-pretty', 'jade-ugly', 'stylus', 'watch');
 });
