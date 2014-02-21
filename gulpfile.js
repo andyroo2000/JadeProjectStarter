@@ -61,7 +61,7 @@ gulp.task('stylus', function() {
 
 // Watch files for changes
 gulp.task('watch', function() {
-  gulp.watch('source-files/scripts/*.js', ['hint']);
+  gulp.watch('source-files/scripts/*.js', ['hint', 'uglify']);
   gulp.watch('source-files/*.jade', ['jade']);
   gulp.watch('source-files/styles/*.styl', ['stylus']);
 });
