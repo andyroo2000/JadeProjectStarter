@@ -16,6 +16,7 @@ gulp.task('hint', function() {
     .pipe(jshint.reporter('default'));
 });
 
+
 // Compile Jade to pretty HTML
 gulp.task('jade-pretty', function() {
   return gulp.src('source-files/*.jade')
@@ -31,7 +32,8 @@ gulp.task('jade-ugly', function() {
     .pipe(gulp.dest('compiled-site/ugly'));
 });
 
-// Compile Stylus to prefixed CSS
+
+// Compile Stylus to prefixed and pretty CSS
 gulp.task('stylus', function() {
   return gulp.src('source-files/styles/*.styl')
     .pipe(stylus())
@@ -39,6 +41,15 @@ gulp.task('stylus', function() {
     .on('error', notify.onError())
     .pipe(gulp.dest('compiled-site/pretty/styles'));
 });
+
+// Compile Stylus to prefixed and ugly CSS
+gulp.task('stylus', function() {
+  return gulp.src('source-files/styles/*.styl')
+    .pipe(stylus({set: ['compress']}))
+    .pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(gulp.dest('compiled-site/ugly/styles'));
+});
+
 
 // Watch files for changes
 gulp.task('watch', function() {
